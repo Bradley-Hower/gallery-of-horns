@@ -1,15 +1,26 @@
 import React from "react";
-import HornedBeast from "./HornedBeast";
-import hornedLizard from '../assets/HornedLizard.jpeg'
-import hornedOwl from '../assets/HornedOwl.jpg' 
+import HornedBeastprofile from "./HornedBeastprofile";
+// import hornedLizard from '../assets/HornedLizard.jpeg'
+// import hornedOwl from '../assets/HornedOwl.jpg' 
+import HornedBeastValues from '../data/data.json';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 class Gallery extends React.Component{
   render(){
     return(
-      <div>
-        <HornedBeast title='Horned Lizard' imageUrl={hornedLizard} description='This is a toad which has poking pretrutions which look like horns'/>
-        <HornedBeast title='Horned Owl' imageUrl={hornedOwl} description='This is an owl which has poking feathers which look like horns'/>
-      </div>
+
+      <Container fluid>
+        <Row>
+          <Col>
+            <section>
+              {HornedBeastValues.map((HornedBeast, idx) => <HornedBeastprofile key={idx} _id={idx} title={HornedBeast.title} image_url={HornedBeast.image_url} keyword={HornedBeast.keyword} description={HornedBeast.description} horns={HornedBeast.horns}/>)}
+            </section>
+          </Col>
+        </Row>
+      </Container>
+          
   ) 
   }
 }
