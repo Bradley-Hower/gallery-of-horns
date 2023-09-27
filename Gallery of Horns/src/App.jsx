@@ -3,8 +3,8 @@ import Header from './Component/Header';
 import Gallery from './Component/Gallery';
 import Footer from './Component/Footer'
 
-
 function App() {
+
   return (
     <div>
       <Header />

@@ -1,26 +1,59 @@
 import React from "react";
 import HornedBeastprofile from "./HornedBeastprofile";
-// import hornedLizard from '../assets/HornedLizard.jpeg'
-// import hornedOwl from '../assets/HornedOwl.jpg' 
 import HornedBeastValues from '../data/data.json';
-import Container from 'react-bootstrap/Container';
+import BeastDetails from './BeastDetails';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
 class Gallery extends React.Component{
+  constructor(){
+    super();
+    this.state = {
+      detailedview: false,
+      beast_title: null,
+      beast_image_url: null,
+      beast_keyword: null,
+      beast_description: null,
+      beast_horns: null,
+    }
+  }
+
+  toggleDetailedView = () => {
+    this.setState({detailedview: !this.state.detailedview})
+  }
+
+  selectbeast = (name) => {
+  HornedBeastValues.map( (e) => {
+    if(e.title === name){
+      this.toggleDetailedView();
+      this.setState({beast_title: e.title})
+      this.setState({beast_image_url: e.image_url})
+      this.setState({beast_keyword: e.keyword})
+      this.setState({beast_description: e.description})
+      this.setState({beast_horns: e.horns})
+      return e.title;
+    } else {
+      return null;
+    }
+  });
+  }
+
+
   render(){
     return(
-
-      <Container fluid>
-        <Row>
-          <Col>
-            <section>
-              {HornedBeastValues.map((HornedBeast, idx) => <HornedBeastprofile key={idx} _id={idx} title={HornedBeast.title} image_url={HornedBeast.image_url} keyword={HornedBeast.keyword} description={HornedBeast.description} horns={HornedBeast.horns}/>)}
-            </section>
-          </Col>
+      <div>
+        <Row xs={1} md={4} className="g-4">
+          {HornedBeastValues.map((HornedBeast, idx) => (
+            <Col key={idx}>
+              <section>
+                <HornedBeastprofile key={idx} _id={idx} title={HornedBeast.title} image_url={HornedBeast.image_url} keyword={HornedBeast.keyword} description={HornedBeast.description} horns={HornedBeast.horns} selectbeast={this.selectbeast} />
+              </section>
+            </Col>
+          ))}
         </Row>
-      </Container>
-          
+        
+        <BeastDetails detailedview={this.state.detailedview} toggleDetailedView={this.toggleDetailedView} title={this.state.beast_title} image_url={this.state.beast_image_url} keyword={this.state.beast_keyword} description={this.state.beast_description} horns={this.state.beast_horns} selectbeast={this.selectbeast}/>
+      </div>
   ) 
   }
 }
