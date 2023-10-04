@@ -50,7 +50,7 @@ class Gallery extends React.Component{
   handleFilter = (filterchoice, hornquantity) => {
     if (filterchoice === 'horns'){
       // this null needs to have filter attached
-      let filteredchoiceinput = HornedBeastValues.filter(element => element.horns == hornquantity);
+      let filteredchoiceinput = HornedBeastValues.filter(element => element.horns === parseInt(hornquantity));
       this.setState({ beastslisted : filteredchoiceinput});
     } else {
       this.setState({ beastslisted : HornedBeastValues});
